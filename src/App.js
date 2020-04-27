@@ -1,24 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import randomcolor from 'randomcolor';
 
 function App() {
+  const [count, setCount] = useState(0);
+  const [color, setColor] = useState('');
+
+  function change() {
+    setCount(prevCount => prevCount + 1);
+  }
+
+  useEffect(() => {
+    setColor(randomcolor());
+  }, [count]);
+
+  console.log(color);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1 style={{ color: color }}>{count}</h1>
+      <button onClick={change}>Change!</button>
     </div>
   );
 }
